@@ -2,6 +2,7 @@
 #include "tuc/small_tools.h"
 #include "tuc/logs.h"
 #include "tuc/user.h"
+#include "tuc/print.h"
 #include "crow_all.h"
 
 #define TUC_VERSION "0.1 Alpha"
