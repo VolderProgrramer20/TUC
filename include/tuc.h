@@ -10,6 +10,7 @@
 class shell {
     private:
         crow::SimpleApp crow_app;
+        std::vector<user> users;
     public:
         void start() {
             crow_app.port(18080).multithreaded().run();

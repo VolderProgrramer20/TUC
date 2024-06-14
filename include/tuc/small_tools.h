@@ -10,5 +10,5 @@ bool file_exist(std::filesystem::path file_path) {
 		file.close();
 		return true;
 	}
-	else { return false; }
+	return false;
 }
