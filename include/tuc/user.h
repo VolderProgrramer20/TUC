@@ -1,21 +1,31 @@
 #include <string>
 
+enum class permissions_enum {
+        ghost = 0,
+        user,
+        admin
+};
+
 class user final {
     private:
-        std::string username, password, language, key, permissions;
+        permissions_enum permissions;
+        std::string name, password, language, key;
         int user_id;
         bool userCreated = false;
     public:
-        user(std::string username, std::string permissions, int user_id) {
+        user() {}
+        user(std::string name, permissions_enum permissions, int user_id) {
             if (!userCreated) {
-                this->username = username;
+                this->name = name;
                 this->permissions = permissions;
                 this->user_id = user_id;
                 userCreated = true;
             }
         }
         bool true_password(std::string password) { return password == this->password; }
-        inline std::string get_username() { return this->username; }
-        inline std::string get_permissions() { return this->permissions; }
+        // Пользователь не имеет нужных разрешений*
+        bool user_has_no_permissions(permissions_enum permissions) { return permissions > this->permissions;}
+        inline std::string get_name() { return this->name; }
+        inline permissions_enum get_permissions() { return this->permissions; }
         inline int get_user_id() { return this->user_id; }
 };
