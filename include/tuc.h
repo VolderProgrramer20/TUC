@@ -2,6 +2,7 @@
 #include <map>
 #include "tuc/small_tools.h"
 #include "tuc/user.h"
+#include "nlohmann/json.hpp"
 #include "crow_all.h"
 
 #define TUC_VERSION "0.1 Alpha"
@@ -11,14 +12,22 @@ class shell {
     private:
         crow::SimpleApp crow_app;
         std::map<std::string, user> users;
-        /*
-        void basic() {
-            CROW_GET(crow_app, "/core/core.js")([]() {
-                mustache::context ctx;
-                return mustache::load_text("core.js");
+        void routes() {
+            CROW_ROUTE(crow_app, "/users")
+            ([this](){
+                nlohmann::json json_data;
+                nlohmann::json user_json;
+                for (const auto& pair : users) {
+                    const std::string& username = pair.first;
+                    user user_data = pair.second;
+                    user_json["name"] = user_data.get_name();
+                    user_json["hashed_password"] = user_data.get_hashed_password();
+                    user_json["permissions"] = static_cast<int>(user_data.get_permissions());
+                    json_data[username] = user_json;
+                }
+                return json_data;
             });
         }
-        */
     public:
         void logLevel(int level) {
             if (level < 0 || level > 4) return;
