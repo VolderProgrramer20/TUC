@@ -33,3 +33,5 @@
 
 # Folders
 tests/*
+build
+out

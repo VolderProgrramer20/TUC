@@ -4,10 +4,10 @@
 class shell;
 
 class module_base {
-  public:
-  module_base(shell* core);
-  virtual void onLoad() = 0;
-  virtual void onUnload() = 0;
-  private:
-  shell* _corePtr;
+	public:
+		module_base(shell* core);
+		virtual void onLoad() = 0;
+		virtual void onUnload() = 0;
+	private:
+		shell* _corePtr;
 };
